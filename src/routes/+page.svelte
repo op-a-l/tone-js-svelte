@@ -1,7 +1,20 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<script lang="ts">
+	//Tone.js import
+	import * as Tone from 'tone';
 
-<style lang="postcss">
-	:global(html) {
-		background-color: theme(colors.gray.100);
+	const synth = new Tone.Synth().toDestination();
+
+	let audioOn = false;
+
+	async function toggleAudio() {
+		await Tone.start();
+		audioOn = true;
+		console.log("L'audio est prêt");
 	}
-</style>
+
+	function triggerNote() {
+		synth.triggerAttackRelease('A1', '8n');
+	}
+</script>
+
+<button class="w-screen bg-green-500" on:click={triggerNote}>A1</button>
